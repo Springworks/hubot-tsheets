@@ -4,6 +4,7 @@
   "description": "TSheets integration for a Hubot",
   "private": false,
   "license": "MIT",
+  "main": "tsheets.coffee",
   "engines": {
     "node": ">=0.10.33"
   },
@@ -21,14 +22,15 @@
     "url": "https://github.com/Springworks/hubot-tsheets/issues"
   },
   "dependencies": {
+    "moment": "^2.9.0",
+    "tsheets-client": "^1.0.1"
   },
   "devDependencies": {
-    "buddy.js": "^0.8.0",
+    "chai": "^1.10.0",
     "coveralls": "^2.11.2",
     "eslint": "^0.11.0",
     "istanbul": "^0.3.5",
     "jsinspect": "^0.4.0",
-    "mocha": "^2.1.0",
-    "should": "^4.6.0"
+    "mocha": "^2.1.0"
   }
 }
