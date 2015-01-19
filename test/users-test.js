@@ -2,7 +2,8 @@
 
 require('chai').should();
 
-var users = require('../lib/users.js');
+var users = require('../lib/users.js'),
+    test_util = require('../test-util/common-test-util.js');
 
 var internals = {
   TEST_USERNAME: 'hoff',
@@ -10,9 +11,16 @@ var internals = {
 };
 
 describe(__filename, function() {
+  var robot_brain;
 
   before(function() {
-    internals.mockTsheetsUserId(internals.TEST_USERNAME, internals.TEST_TSHEETS_USER_ID);
+    robot_brain = test_util.mockRobotBrain();
+  });
+
+  before(function() {
+    internals.mockTsheetsUserId(robot_brain,
+        internals.TEST_USERNAME,
+        internals.TEST_TSHEETS_USER_ID);
   });
 
   describe('getTsheetsUserId', function() {
@@ -22,7 +30,7 @@ describe(__filename, function() {
           expected_user_id = internals.TEST_TSHEETS_USER_ID;
 
       it('should return TSheets username', function() {
-        var tsheets_user_id = users.getTsheetsUserId(username);
+        var tsheets_user_id = users.getTsheetsUserId(username, robot_brain);
         tsheets_user_id.should.eql(expected_user_id);
       });
 
@@ -32,8 +40,26 @@ describe(__filename, function() {
 
       it('should throw error', function() {
         (function() {
-          users.getTsheetsUserId('mr-foo-bar-baz');
+          users.getTsheetsUserId('mr-foo-bar-baz', robot_brain);
         }).should.throw();
+      });
+
+    });
+
+  });
+
+  describe('rememberUser', function() {
+
+    describe('with valid params', function() {
+      it('should persist user in "robot.brain"', function() {
+        var hubot_username = 'hubot_user',
+            tsheets_user_id = 123456;
+
+        users.rememberUser(robot_brain, hubot_username, tsheets_user_id);
+
+        robot_brain.should.have.property('tsheetsUserIdsByHubotUsername');
+        robot_brain.tsheetsUserIdsByHubotUsername.
+            should.have.property(hubot_username, tsheets_user_id);
       });
 
     });
@@ -43,6 +69,6 @@ describe(__filename, function() {
 });
 
 
-internals.mockTsheetsUserId = function(username, user_id) {
-  users.internals.tsheetsUserIdsByUsername[username] = parseInt(user_id, 10);
+internals.mockTsheetsUserId = function(robot_brain, username, user_id) {
+  users.rememberUser(robot_brain, username, user_id);
 };
