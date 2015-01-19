@@ -3,11 +3,12 @@
 var should = require('chai').should();
 
 var task = require('../../lib/tasks/report-time.js'),
-    test_util = require('../../test-util/common-test-util.js');
+    test_util = require('../../test-util/common-test-util.js'),
+    patterns = require('../../lib/patterns.js');
 
 var internals = {
   TEST_TIMEOUT: 10 * 1000,
-  REPORT_PATTERN: /tsheets report (.*)/i,
+  REPORT_PATTERN: patterns.REPORT_TIME,
   VALID_REPORT_STRING: 'tsheets report cruising 0.01',
   TEST_API_TOKEN: process.env.HUBOT_TSHEETS_API_CLIENT_TOKEN || 'abc123',
   TEST_HUBOT_INPUT_USERNAME: 'david-hasselhoff',
@@ -17,13 +18,19 @@ var internals = {
 };
 
 describe(__filename, function() {
+  var robot_brain;
 
   this.timeout(internals.TEST_TIMEOUT);
 
   before(function() {
+    robot_brain = test_util.mockRobotBrain();
+  });
+
+  before(function() {
     internals.mockApiToken();
 
-    test_util.mockTsheetsUserId(internals.TEST_HUBOT_INPUT_USERNAME,
+    test_util.mockTsheetsUserId(robot_brain,
+        internals.TEST_HUBOT_INPUT_USERNAME,
         internals.TEST_TSHEETS_USER_ID);
 
     test_util.mockTsheetsJobcodeId(internals.TEST_HUBOT_INPUT_JOBCODE,
@@ -37,11 +44,13 @@ describe(__filename, function() {
           username = internals.TEST_HUBOT_INPUT_USERNAME;
 
       beforeEach(function() {
-        msg = internals.mockInputMessage(internals.VALID_REPORT_STRING, username);
+        msg = test_util.mockInputMessage(internals.REPORT_PATTERN,
+            internals.VALID_REPORT_STRING,
+            username);
       });
 
       it('should update time report for the specified user', function(done) {
-        task.execute(msg, function(err, response_message) {
+        task.execute(msg, robot_brain, function(err, response_message) {
           should.not.exist(err);
           response_message.should.eql('Time card updated. :pencil:');
           done(err);
@@ -59,7 +68,9 @@ describe(__filename, function() {
           username = internals.TEST_HUBOT_INPUT_USERNAME;
 
       beforeEach(function() {
-        msg = internals.mockInputMessage(internals.VALID_REPORT_STRING, username);
+        msg = test_util.mockInputMessage(internals.REPORT_PATTERN,
+            internals.VALID_REPORT_STRING,
+            username);
       });
 
       it('should convert to proper params', function() {
@@ -105,11 +116,12 @@ describe(__filename, function() {
 
       it('should return an object with all required params', function() {
         var params = task.internals.createParamsForTimeReport({
-          username: internals.TEST_HUBOT_INPUT_USERNAME,
-          jobcode: jobcode,
-          date: date,
-          hours: hours
-        });
+              username: internals.TEST_HUBOT_INPUT_USERNAME,
+              jobcode: jobcode,
+              date: date,
+              hours: hours
+            },
+            robot_brain);
 
         params.should.eql({
           api_token: internals.TEST_API_TOKEN,
@@ -147,14 +159,4 @@ describe(__filename, function() {
 
 internals.mockApiToken = function() {
   task.internals.TSHEETS_API_TOKEN = internals.TEST_API_TOKEN;
-};
-
-
-internals.mockInputMessage = function(test_string, username) {
-  var msg = {};
-  msg.match = test_string.match(internals.REPORT_PATTERN);
-  msg.message = {
-    user: { name: username }
-  };
-  return msg;
 };
