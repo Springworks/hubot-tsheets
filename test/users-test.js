@@ -57,9 +57,7 @@ describe(__filename, function() {
 
         users.rememberUser(robot_brain, hubot_username, tsheets_user_id);
 
-        robot_brain.should.have.property('tsheetsUserIdsByHubotUsername');
-        robot_brain.tsheetsUserIdsByHubotUsername.
-            should.have.property(hubot_username, tsheets_user_id);
+        users.internals.getUserFromBrain(robot_brain, hubot_username).should.eql(tsheets_user_id);
       });
 
     });

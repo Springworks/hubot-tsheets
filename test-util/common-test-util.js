@@ -15,7 +15,15 @@ exports.mockTsheetsJobcodeId = function(jobcode, jobcode_id) {
 
 
 exports.mockRobotBrain = function() {
-  return {};
+  var brain = {};
+  return {
+    get: function(key) {
+      return brain[key];
+    },
+    set: function(key, val) {
+      brain[key] = val;
+    }
+  };
 };
 
 
