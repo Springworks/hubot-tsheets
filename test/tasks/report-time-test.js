@@ -103,6 +103,16 @@ describe(__filename, function() {
 
     });
 
+    describe('with a calculation as hours input', function() {
+
+      it('should convert 17-8 to 9', function() {
+        var ONE_HOUR_IN_SECONDS = 60 * 60,
+            hours = task.internals.convertHoursToSeconds('17-8');
+        hours.should.eql(9 * ONE_HOUR_IN_SECONDS);
+      });
+
+    });
+
   });
 
   describe('internals.createParamsForTimeReport', function() {
