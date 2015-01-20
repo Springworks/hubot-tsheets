@@ -9,3 +9,12 @@ after_success:
 env:
   global:
     secure: kdUe38vSHheMi8L/q6j8tBau5KNorodGqhvgvS7seQsdihrD7PzsJ/RihigLKHAeoPxptrT/V17lgZVvh0E5pPsC5EC1B7wFePvrcrZTHlk/lCuWdDPpLPkCPUVZ1kSQSLiJMBnwwwvOj0o9KUeX95dwCgxEE+kvDe+/LUMnKN8=
+deploy:
+  provider: npm
+  email: kristofer@sommestad.com
+  api_key:
+    secure: GBHAKhFa92scTx+Y1Ju5avlrGOHOeOmoBLe1tMO7VMR6GWb+YpCt7ijM15vD2/4slBms3b9WZ7sRk76MOErrZkVr7fv5kunomVaSf1QKJw1/hkr2YOx7r0x2WIeMD/TjjypvuQcVvs8aHbM1gC76pothpPxawZsAM3M9Ys3YBnk=
+  on:
+    tags: true
+    repo: Springworks/hubot-tsheets
+    branch: master
