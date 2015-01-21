@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "moment": "^2.9.0",
-    "tsheets-client": "^1.0.1"
+    "tsheets-client": "^1.0.5"
   },
   "devDependencies": {
     "chai": "^1.10.0",
