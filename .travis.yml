@@ -17,3 +17,4 @@ deploy:
   on:
     tags: true
     repo: Springworks/hubot-tsheets
+    all_branches: true
