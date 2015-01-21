@@ -17,4 +17,3 @@ deploy:
   on:
     tags: true
     repo: Springworks/hubot-tsheets
-    branch: master
