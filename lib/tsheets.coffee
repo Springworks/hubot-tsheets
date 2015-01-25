@@ -18,8 +18,8 @@
 # Author:
 #   sommestad
 
-tsheets_service = require './lib/tsheets-service.js'
-patterns = require './lib/patterns.js'
+tsheets_service = require './tsheets-service.js'
+patterns = require './patterns.js'
 
 module.exports = (robot) ->
   generateAckMessage = ->
