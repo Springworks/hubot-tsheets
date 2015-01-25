@@ -22,7 +22,6 @@
 # Notes:
 #   Requires a TSheets account with API access.
 #   Planned to be implemented:
-#     hubot tsheets show jobcodes - Lists all available job codes
 #     hubot tsheets show reports <since time> - Shows reports by user since the specified time
 #     hubot tsheets show mine <since time> - Shows reports for the current user
 
