@@ -4,7 +4,7 @@
   "description": "TSheets integration for a Hubot",
   "private": false,
   "license": "MIT",
-  "main": "tsheets.coffee",
+  "main": "index.coffee",
   "engines": {
     "node": ">=0.10.33"
   },
