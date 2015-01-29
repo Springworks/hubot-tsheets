@@ -28,4 +28,16 @@ describe(__filename, function() {
 
   });
 
+  describe('SHOW_SUMMARY pattern', function() {
+
+    it('should be "tsheets summary <from date> <to date>"', function() {
+      patterns.SHOW_SUMMARY.should.eql(/tsheets summary(.*)/i);
+    });
+
+    it('should match without args', function() {
+      patterns.SHOW_SUMMARY.test('tsheets summary').should.eql(true);
+    });
+
+  });
+
 });

@@ -10,10 +10,12 @@ var internals = {
   TEST_TIMEOUT: 10 * 1000,
   REPORT_PATTERN: patterns.REPORT_TIME,
   REMEMBER_USER_PATTERN: patterns.REMEMBER_USER,
+  SHOW_SUMMARY_PATTERN: patterns.SHOW_SUMMARY,
 
   VALID_REPORT_STRING: 'tsheets report cruising 0.01',
   VALID_LIST_JOBCODES_STRING: 'tsheets list jobcodes',
   VALID_REMEMBER_USER_STRING: 'tsheets i am david-hasselhoff',
+  VALID_SHOW_SUMMARY_STRING: 'tsheets show summary 2015-01-26 2015-01-27',
 
   TEST_API_TOKEN: process.env.HUBOT_TSHEETS_API_CLIENT_TOKEN || 'abc123',
   TEST_HUBOT_INPUT_USERNAME: 'david-hasselhoff',
@@ -101,6 +103,31 @@ describe(__filename, function() {
         done();
       });
     });
+  });
+
+  describe('showSummary', function() {
+
+    describe('with valid params', function() {
+      var msg,
+          username = internals.TEST_HUBOT_INPUT_USERNAME;
+
+      beforeEach(function() {
+        msg = test_util.mockInputMessage(internals.SHOW_SUMMARY_PATTERN,
+            internals.VALID_SHOW_SUMMARY_STRING,
+            username);
+      });
+
+      it('should get timesheets summary for the specified period', function(done) {
+        service.showSummary(msg, robot_brain, function(err, response_message) {
+          should.not.exist(err);
+          should.exist(response_message);
+          response_message.should.not.have.length(0);
+          done();
+        });
+      });
+
+    });
+
   });
 
 });

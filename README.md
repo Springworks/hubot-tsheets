@@ -16,14 +16,15 @@
 #
 # Commands:
 #   tsheets report <jobcode name> <hours> [<date>] - Reports time for a specific job code
-#   tsheets list jobcodes - Lists all job codes
-#   tsheets i am <tsheets user id> - Connects a TSheets user to the current Hubot user
+#   tsheets list jobcodes - Lists all job codes available to use
+#   tsheets I am <tsheets user id> - Connects a TSheets user to the current Hubot user
+#   tsheets summary [<start date>] [<end date>] - Shows reports for all users between dates, defaults to current week
 #
 # Notes:
-#   Requires a TSheets account with API access.
+#   Requires a TSheets account with API access:
 #   Planned to be implemented:
-#     hubot tsheets show reports <since time> - Shows reports by user since the specified time
 #     hubot tsheets show mine <since time> - Shows reports for the current user
+#
 
 ```
 
