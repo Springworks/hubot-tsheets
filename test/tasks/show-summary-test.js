@@ -12,7 +12,7 @@ var internals = {
   TEST_TIMEOUT: 20 * 1000
 };
 
-describe.only(__filename, function() {
+describe(__filename, function() {
 
   this.timeout(internals.TEST_TIMEOUT);
 
