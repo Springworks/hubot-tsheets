@@ -18,3 +18,7 @@ deploy:
     tags: true
     repo: Springworks/hubot-tsheets
     all_branches: true
+notifications:
+  email: false
+  slack:
+    secure: Fz+OeKsRZcLJcQleJmkj7le6+GZt3phs07eP2rycZ1V7Nua2at5T+P76sCt8vdkRw0f1YR1DPduyGyzcbwJMctaGe99e0hNyxKW85RanloM2xF+FrTHpOrx/IFq6bXAirMaBuGImfHcLHOA81eNFvLrFYzSLtWAwjPHay7tygYE=
