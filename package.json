@@ -22,8 +22,9 @@
     "url": "https://github.com/Springworks/hubot-tsheets/issues"
   },
   "dependencies": {
+    "hoek": "^2.11.0",
     "moment": "^2.9.0",
-    "tsheets-client": "^1.0.5"
+    "tsheets-client": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^1.10.0",
