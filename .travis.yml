@@ -8,7 +8,7 @@ after_success:
 - npm run coveralls
 env:
   global:
-    secure: kdUe38vSHheMi8L/q6j8tBau5KNorodGqhvgvS7seQsdihrD7PzsJ/RihigLKHAeoPxptrT/V17lgZVvh0E5pPsC5EC1B7wFePvrcrZTHlk/lCuWdDPpLPkCPUVZ1kSQSLiJMBnwwwvOj0o9KUeX95dwCgxEE+kvDe+/LUMnKN8=
+  - secure: pwCojzoAzIG9ZhAKNJi6KYfVkNpd6+zJG7fj6d6FPCEcw8nddnTa1qXlPgzLHERZBOpRZZtRVeHGIUKWJEbj0jq+LS8gXLASKm3HDbpZHWr1X+B8bSRqiqXif3l3bg0GaHefpMMV+AvFf37CfMn5tQBJtrE4mSTNHcwVTxs0Sqo=
 deploy:
   provider: npm
   email: kristofer@sommestad.com
